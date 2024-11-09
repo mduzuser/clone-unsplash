@@ -11,7 +11,7 @@ function ImageContainer({ images }) {
       <Masonry
         gutter="10px"
         columnsCountBreakPoints={{
-          350: 2,
+          350: 1,
           750: 3,
           900: 4,
         }}

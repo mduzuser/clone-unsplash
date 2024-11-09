@@ -6,6 +6,7 @@ const dataFromLocalStorage = () => {
   return (
     JSON.parse(localStorage.getItem("liked-images")) || {
       likedImages: [],
+      downloadImages: [],
     }
   );
 };
@@ -22,6 +23,16 @@ const changState = (state, action) => {
       return {
         ...state,
         likedImages: state.likedImages.filter((image) => image.id != payload),
+      };
+    case "DOWNLOAD":
+      return {
+        ...state,
+        downloadImages: [...(state.downloadImages || []), payload],
+      };
+    case "CLEAR_DOWNLOADS":
+      return {
+        ...state,
+        downloadImages: [],
       };
     default:
       return state;

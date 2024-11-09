@@ -7,10 +7,10 @@ function Search() {
   return (
     <Form
       method="post"
-      className="align-elements  flex gap-3 items-center mt-5 mb-5"
+      className="align-elements mb-5 mt-5 flex items-center gap-3"
     >
       <FormInput type="search" placeholder="Search photos" name="search" />
-      <button className="btn bg-primary-content btn-sm md:btn-md md:hidden">
+      <button className="btn btn-sm bg-primary-content md:btn-md lg:hidden">
         Search
       </button>
     </Form>

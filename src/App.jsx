@@ -2,7 +2,14 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 //pages
-import { Home, About, Contact, LikedImages, DownloadImages } from "./pages";
+import {
+  Home,
+  About,
+  Contact,
+  LikedImages,
+  DownloadImages,
+  ImageInfo,
+} from "./pages";
 
 //layout
 import { MainLayout } from "./layout";
@@ -36,6 +43,10 @@ function App() {
         {
           path: "/download-images",
           element: <DownloadImages />,
+        },
+        {
+          path: "/image-info",
+          element: <ImageInfo />,
         },
       ],
     },

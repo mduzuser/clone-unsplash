@@ -20,7 +20,7 @@ const themeLocalStorage = () => {
   return localStorage.getItem("theme") || "winter";
 };
 function Navbar() {
-  const { likedImages } = useGlobalContext();
+  const { likedImages, downloadImages } = useGlobalContext();
 
   const [theme, setTheme] = useState(themeLocalStorage());
 
@@ -58,7 +58,7 @@ function Navbar() {
           <Link to={"/download-images"} className="hidden md:flex">
             <div className="indicator">
               <span className="badge indicator-item badge-secondary badge-sm">
-                0
+                {downloadImages.length}
               </span>
               <FaDownload className="text-2xl md:text-3xl" />
             </div>
@@ -113,7 +113,7 @@ function Navbar() {
                 <Link to={"/download-images"}>
                   <div className="indicator">
                     <span className="badge indicator-item badge-secondary badge-sm">
-                      0
+                      {downloadImages.length}
                     </span>
                     <FaDownload className="text-2xl md:text-3xl" />
                   </div>
