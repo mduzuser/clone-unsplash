@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .align-elements {
+    @apply max-w-7xl mx-auto px-5;
+  }
+
+  .align-elements-sm {
+    @apply max-w-7xl mx-auto px-1;
+  }
+
+  .fa-heart {
+    @apply absolute top-2 right-2 rounded-xl w-12 h-9 flex items-center 
+    justify-center cursor-pointer invisible opacity-0 
+    group-hover:opacity-100 group-hover:visible transition-all duration-300;
+  }
+
+  .icon-hover {
+    @apply cursor-pointer invisible opacity-0 
+    group-hover:opacity-100 group-hover:visible transition-all duration-300;
+  }
+
+  html,
+  body,
+  #root {
+    @apply h-full;
+  }
+
+  #root {
+    @apply flex flex-col;
+  }
+
+  main {
+    @apply grow bg-base-200;
+  }
+}
