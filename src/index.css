@@ -4,22 +4,19 @@
 
 @layer components {
   .align-elements {
-    @apply max-w-7xl mx-auto px-5;
+    @apply mx-auto max-w-7xl px-5;
   }
 
   .align-elements-sm {
-    @apply max-w-7xl mx-auto px-1;
+    @apply mx-auto max-w-7xl px-1;
   }
 
   .fa-heart {
-    @apply absolute top-2 right-2 rounded-xl w-12 h-9 flex items-center 
-    justify-center cursor-pointer invisible opacity-0 
-    group-hover:opacity-100 group-hover:visible transition-all duration-300;
+    @apply invisible absolute right-2 top-2 flex h-9 w-12 cursor-pointer items-center justify-center rounded-xl opacity-0 transition-all duration-300 group-hover:visible group-hover:opacity-100;
   }
 
   .icon-hover {
-    @apply cursor-pointer invisible opacity-0 
-    group-hover:opacity-100 group-hover:visible transition-all duration-300;
+    @apply invisible cursor-pointer opacity-0 transition-all duration-300 group-hover:visible group-hover:opacity-100;
   }
 
   html,
@@ -34,5 +31,9 @@
 
   main {
     @apply grow bg-base-200;
+  }
+
+  .breakPoint-image {
+    @apply hidden md:flex;
   }
 }
