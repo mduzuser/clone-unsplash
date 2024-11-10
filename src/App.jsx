@@ -25,8 +25,19 @@ import { action as HomeAction } from "./pages/Home";
 
 //components
 import { ProtectedRoutes } from "./components";
+
+//global context
+import { useGlobalContext } from "./hooks/useGlobalContext";
+
+//react impotrs
+import { useEffect } from "react";
+
+//firebase auth
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "./firebase/firebaseConfig";
+
 function App() {
-  const user = false;
+  const { user, dispatch, authReady } = useGlobalContext();
   const routes = createBrowserRouter([
     {
       path: "/",
@@ -72,7 +83,15 @@ function App() {
       element: user ? <Navigate to={"/"} /> : <Register />,
     },
   ]);
-  return <RouterProvider router={routes} />;
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      dispatch({ type: "LOGIN", payload: user });
+      dispatch({ type: "AUTH_READY" });
+    });
+  }, []);
+
+  return <>{authReady && <RouterProvider router={routes} />}</>;
 }
 
 export default App;

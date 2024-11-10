@@ -13,20 +13,35 @@ import { useGlobalContext } from "../hooks/useGlobalContext";
 
 //components
 import { NavLinks } from "./";
-import { FaDownload, FaUserCircle } from "react-icons/fa";
+import { FaDownload } from "react-icons/fa";
+
+//firebase
+import { signOut } from "firebase/auth";
+import { auth } from "../firebase/firebaseConfig";
+import { toast } from "react-toastify";
 
 //save theme local stroge
 const themeLocalStorage = () => {
   return localStorage.getItem("theme") || "winter";
 };
 function Navbar() {
-  const { likedImages, downloadImages } = useGlobalContext();
+  const { likedImages, downloadImages, user, dispatch } = useGlobalContext();
 
   const [theme, setTheme] = useState(themeLocalStorage());
 
   const toggleTheme = () => {
     const newTheme = theme == "winter" ? "dracula" : "winter";
     setTheme(newTheme);
+  };
+
+  const signOutUser = async () => {
+    try {
+      dispatch({ type: "LOGOUT" });
+      await signOut(auth);
+      toast.success("Logged out successfully!");
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
 
   useEffect(() => {
@@ -87,8 +102,36 @@ function Navbar() {
           {/* day/night */}
 
           {/* user */}
-          <div>
-            <FaUserCircle className="text-3xl md:text-4xl" />
+          <div className="flex items-center gap-3">
+            <p className="font-bold">{user.displayName.split(" ")[0]}</p>
+            <div className="dropdown dropdown-end">
+              <div
+                tabIndex={0}
+                role="button"
+                className="avatar btn btn-circle btn-ghost"
+              >
+                <div className="w-10 rounded-full ring ring-primary ring-offset-2 ring-offset-base-100">
+                  <img src={user.photoURL} alt="" />
+                </div>
+              </div>
+              <ul
+                tabIndex={0}
+                className="menu dropdown-content menu-sm z-[1] mt-3 w-52 rounded-box bg-base-100 p-2 shadow"
+              >
+                <li>
+                  <a className="justify-between">
+                    Profile
+                    <span className="badge">New</span>
+                  </a>
+                </li>
+                <li>
+                  <a>Settings</a>
+                </li>
+                <li>
+                  <button onClick={signOutUser}>Logout</button>
+                </li>
+              </ul>
+            </div>
           </div>
           {/* user */}
 

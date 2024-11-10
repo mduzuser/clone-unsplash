@@ -6,6 +6,7 @@ import { useGlobalContext } from "../hooks/useGlobalContext";
 
 //rrd
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function Image({ image, added }) {
   const { likedImages, dispatch } = useGlobalContext();
@@ -20,17 +21,17 @@ function Image({ image, added }) {
 
     if (!alreadyAdded) {
       dispatch({ type: "LIKE", payload: image });
-      alert("New photo added!");
+      toast.success("New photo added!");
     } else {
       dispatch({ type: "UNLIKE", payload: image.id });
-      alert("Photo removed!");
+      toast.error("Photo is removed !");
     }
   };
 
   const downloadimage = (e) => {
     e.preventDefault();
     window.open(links.download + "&force=true", "_blank");
-    alert("Image downloaded successfully!");
+    toast.success("Image downloaded successfully!");
     dispatch({ type: "DOWNLOAD", payload: image });
   };
 
