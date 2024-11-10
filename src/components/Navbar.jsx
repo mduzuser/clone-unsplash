@@ -53,6 +53,49 @@ function Navbar() {
   return (
     <header className="bg-primary-content">
       <div className="align-elements navbar">
+        {/* bars */}
+        <div className="dropdown md:hidden">
+          <div
+            tabIndex={0}
+            role="button"
+            className="btn m-1 border-none bg-transparent shadow-none hover:bg-transparent"
+          >
+            <FaBarsProgress className="text-3xl md:text-4xl" />
+          </div>
+
+          <ul
+            tabIndex={0}
+            className="menu dropdown-content z-[1] w-auto rounded-lg bg-base-100 p-5 text-center shadow"
+          >
+            <NavLinks />
+
+            <div className="mt-5 flex items-center justify-center gap-5">
+              {/* downloaded images */}
+              <Link to={"/download-images"}>
+                <div className="indicator">
+                  <span className="badge indicator-item badge-secondary badge-sm">
+                    {downloadImages.length}
+                  </span>
+                  <FaDownload className="text-2xl md:text-3xl" />
+                </div>
+              </Link>
+              {/* downloaded images */}
+
+              {/* liked images */}
+              <Link to={"/liked-images"}>
+                <div className="indicator">
+                  <span className="badge indicator-item badge-secondary badge-sm">
+                    {likedImages.length}
+                  </span>
+                  <FaHeart className="text-2xl md:text-3xl" />
+                </div>
+              </Link>
+              {/* liked images */}
+            </div>
+          </ul>
+        </div>
+        {/* bars */}
+
         {/* navbar start */}
         <div className="navbar-start">
           <Link to={"/"}>
@@ -138,49 +181,6 @@ function Navbar() {
             </div>
           </div>
           {/* user */}
-
-          {/* bars */}
-          <div className="dropdown dropdown-end dropdown-bottom md:hidden">
-            <div
-              tabIndex={0}
-              role="button"
-              className="btn m-1 border-none bg-transparent shadow-none hover:bg-transparent"
-            >
-              <FaBarsProgress className="text-3xl md:text-4xl" />
-            </div>
-
-            <ul
-              tabIndex={0}
-              className="menu dropdown-content z-[1] w-auto rounded-lg bg-base-100 p-5 text-center shadow"
-            >
-              <NavLinks />
-
-              <div className="mt-5 flex items-center justify-center gap-5">
-                {/* downloaded images */}
-                <Link to={"/download-images"}>
-                  <div className="indicator">
-                    <span className="badge indicator-item badge-secondary badge-sm">
-                      {downloadImages.length}
-                    </span>
-                    <FaDownload className="text-2xl md:text-3xl" />
-                  </div>
-                </Link>
-                {/* downloaded images */}
-
-                {/* liked images */}
-                <Link to={"/liked-images"}>
-                  <div className="indicator">
-                    <span className="badge indicator-item badge-secondary badge-sm">
-                      {likedImages.length}
-                    </span>
-                    <FaHeart className="text-2xl md:text-3xl" />
-                  </div>
-                </Link>
-                {/* liked images */}
-              </div>
-            </ul>
-          </div>
-          {/* bars */}
         </div>
         {/* navbar end */}
       </div>
