@@ -22,6 +22,8 @@ import { MainLayout } from "./layout";
 
 //action
 import { action as HomeAction } from "./pages/Home";
+import { action as RegisterAction } from "./pages/Register";
+import { action as LoginAction } from "./pages/Login";
 
 //components
 import { ProtectedRoutes } from "./components";
@@ -77,10 +79,12 @@ function App() {
     {
       path: "/login",
       element: user ? <Navigate to={"/"} /> : <Login />,
+      action: LoginAction,
     },
     {
       path: "/register",
       element: user ? <Navigate to={"/"} /> : <Register />,
+      action: RegisterAction,
     },
   ]);
 

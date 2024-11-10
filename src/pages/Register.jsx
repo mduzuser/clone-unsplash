@@ -1,5 +1,5 @@
 //rrd
-import { Form, Link } from "react-router-dom";
+import { Form, Link, useActionData } from "react-router-dom";
 
 //components
 import { FormInput } from "../components";
@@ -9,9 +9,41 @@ import { FcGoogle } from "react-icons/fc";
 
 //register hooks
 import { useRegister } from "../hooks/useRegister";
+import { useEffect } from "react";
 
+// action
+export const action = async ({ request }) => {
+  const formData = await request.formData();
+
+  const userName = formData.get("userName");
+  const userEmail = formData.get("userEmail");
+  const userPassword = formData.get("userPassword");
+  const confirmPassword = formData.get("confirmPassword");
+
+  if (userPassword == confirmPassword) {
+    return {
+      userName,
+      userEmail,
+      userPassword,
+    };
+  } else {
+    return null;
+  }
+};
 function Register() {
-  const { registerWithGoogle } = useRegister();
+  const inputData = useActionData();
+  const { registerWithGoogle, registerWithEmail } = useRegister();
+
+  useEffect(() => {
+    if (inputData) {
+      registerWithEmail(
+        inputData.userName,
+        inputData.userEmail,
+        inputData.userPassword,
+      );
+    }
+  }, [inputData]);
+
   return (
     <div className="flex h-screen w-full flex-col items-center justify-center bg-gradient-to-r from-sky-500 to-indigo-500 px-5">
       <div className="w-full max-w-96 rounded-lg bg-white px-10 py-5">
@@ -20,14 +52,30 @@ function Register() {
             Register
           </p>
           <div className="flex flex-col gap-3 md:gap-5">
-            <FormInput placeholder="Username" name="userName" type="text" />
-            <FormInput placeholder="Email" name="userEmail" type="email" />
+            <FormInput
+              placeholder="Username"
+              name="userName"
+              type="text"
+              // request
+            />
+            <FormInput
+              placeholder="Email"
+              name="userEmail"
+              type="email"
+              // request
+            />
             <FormInput
               placeholder="Password"
               name="userPassword"
               type="password"
+              // request
             />
-            <FormInput placeholder="Confirm password" type="password" />
+            <FormInput
+              placeholder="Confirm password"
+              name="confirmPassword"
+              type="password"
+              // request
+            />
           </div>
           <div className="mt-5 md:flex md:items-center md:justify-between">
             <button

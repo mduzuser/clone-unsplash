@@ -18,6 +18,8 @@ import { FaDownload } from "react-icons/fa";
 //firebase
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase/firebaseConfig";
+
+//toastfiye
 import { toast } from "react-toastify";
 
 //save theme local stroge
@@ -103,7 +105,9 @@ function Navbar() {
 
           {/* user */}
           <div className="flex items-center gap-3">
-            <p className="font-bold">{user.displayName.split(" ")[0]}</p>
+            <p className="font-bold">
+              {user.displayName && user.displayName.split(" ")[0]}
+            </p>
             <div className="dropdown dropdown-end">
               <div
                 tabIndex={0}
@@ -111,7 +115,7 @@ function Navbar() {
                 className="avatar btn btn-circle btn-ghost"
               >
                 <div className="w-10 rounded-full ring ring-primary ring-offset-2 ring-offset-base-100">
-                  <img src={user.photoURL} alt="" />
+                  {user.photoURL && <img src={user.photoURL} />}
                 </div>
               </div>
               <ul
