@@ -4,7 +4,9 @@ import { MdEmail } from "react-icons/md";
 function FormInput({ type, name, placeholder }) {
   return (
     <label className="input input-sm input-bordered flex grow items-center gap-2 md:input-md">
-      {placeholder == "search" && <FaSearch className="h-4 w-4 opacity-70" />}
+      {placeholder == "Search photos" && (
+        <FaSearch className="h-4 w-4 opacity-70" />
+      )}
 
       <input
         type={type}

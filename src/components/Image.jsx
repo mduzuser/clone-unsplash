@@ -6,25 +6,31 @@ import { useGlobalContext } from "../hooks/useGlobalContext";
 
 //rrd
 import { Link } from "react-router-dom";
+
+//toastify
 import { toast } from "react-toastify";
 
+//useFirestore
+import { useFirestore } from "../hooks/useFirestore";
+
 function Image({ image, added }) {
-  const { likedImages, dispatch } = useGlobalContext();
+  const { likedImages, user: authUser } = useGlobalContext();
+
+  const { addDocument, deleteDocument } = useFirestore();
 
   const { links, urls, alt_description, user } = image;
 
   const addLikedImages = (image, e) => {
     e.preventDefault();
-    const alreadyAdded = likedImages.some((img) => {
+
+    const alreadyAdded = likedImages.find((img) => {
       return img.id == image.id;
     });
 
     if (!alreadyAdded) {
-      dispatch({ type: "LIKE", payload: image });
-      toast.success("New photo added!");
+      addDocument("likedImages", { ...image, uid: authUser.uid });
     } else {
-      dispatch({ type: "UNLIKE", payload: image.id });
-      toast.error("Photo is removed !");
+      deleteDocument("likedImages", alreadyAdded._id);
     }
   };
 

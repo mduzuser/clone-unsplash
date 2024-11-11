@@ -1,4 +1,5 @@
 import { createContext, useEffect, useReducer } from "react";
+import { useCollection } from "../hooks/useCollection";
 
 export const GlobalContext = createContext();
 
@@ -29,16 +30,16 @@ const changState = (state, action) => {
         ...state,
         user: null,
       };
-    case "LIKE":
+    case "ADD_REMOVE":
       return {
         ...state,
-        likedImages: [...state.likedImages, payload],
+        likedImages: payload,
       };
-    case "UNLIKE":
-      return {
-        ...state,
-        likedImages: state.likedImages.filter((image) => image.id != payload),
-      };
+    // case "UNLIKE":
+    //   return {
+    //     ...state,
+    //     likedImages: state.likedImages.filter((image) => image.id != payload),
+    //   };
     case "DOWNLOAD":
       return {
         ...state,
@@ -61,9 +62,21 @@ export function GlobalContextProvider({ children }) {
     downloadImages: [],
   });
 
+  const { data: likedImages } = useCollection("likedImages", [
+    "uid",
+    "==",
+    state.user && state.user.uid,
+  ]);
+
   useEffect(() => {
     localStorage.setItem("liked-images", JSON.stringify(state));
   }, [state]);
+
+  useEffect(() => {
+    if (likedImages) {
+      dispatch({ type: "ADD_REMOVE", payload: likedImages });
+    }
+  }, [likedImages]);
   return (
     <GlobalContext.Provider value={{ ...state, dispatch }}>
       {children}
