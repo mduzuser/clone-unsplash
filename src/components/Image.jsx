@@ -42,7 +42,7 @@ function Image({ image, added }) {
   };
 
   return (
-    <Link to={"/image-info"}>
+    <Link to={`/image-info/${image.id}`}>
       <section className="border bg-primary-content">
         <div className="group relative">
           <img

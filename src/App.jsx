@@ -71,7 +71,7 @@ function App() {
           element: <DownloadImages />,
         },
         {
-          path: "/image-info",
+          path: "/image-info/:id",
           element: <ImageInfo />,
         },
       ],
