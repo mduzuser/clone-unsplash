@@ -89,12 +89,12 @@ function ImageInfo() {
 
           <span>-</span>
 
-          <span className="flex items-center gap-1">
+          <div className="flex items-center gap-3">
             <span className="italic">
               {user.location ? user.location : "Not found"}
             </span>
-            <FaMapMarkedAlt />
-          </span>
+            <FaMapMarkedAlt className="text-2xl" />
+          </div>
         </div>
 
         <div className="my-5">
