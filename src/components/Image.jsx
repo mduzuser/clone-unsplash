@@ -23,6 +23,12 @@ function Image({ image, added }) {
   const addLikedImages = (image, e) => {
     e.preventDefault();
 
+    if (!authUser.emailVerified) {
+      return toast.info(
+        "Verification required! Go to your profile to complete verification.",
+      );
+    }
+
     const alreadyAdded = likedImages.find((img) => {
       return img.id == image.id;
     });
@@ -36,9 +42,14 @@ function Image({ image, added }) {
 
   const downloadimage = (e) => {
     e.preventDefault();
+    if (!authUser.emailVerified) {
+      return toast.info(
+        "Verification required! Go to your profile to complete verification.",
+      );
+    }
     window.open(links.download + "&force=true", "_blank");
     toast.success("Image downloaded successfully!");
-    dispatch({ type: "DOWNLOAD", payload: image });
+    // dispatch({ type: "DOWNLOAD", payload: image });
   };
 
   return (

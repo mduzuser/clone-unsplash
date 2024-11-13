@@ -2,7 +2,7 @@
 import { FaBarsProgress, FaHeart } from "react-icons/fa6";
 import { IoMdMoon } from "react-icons/io";
 import { IoSunnyOutline } from "react-icons/io5";
-import { MdPhotoCamera } from "react-icons/md";
+import { MdPhotoCamera, MdVerified } from "react-icons/md";
 
 //rrd
 import { Link } from "react-router-dom";
@@ -157,8 +157,19 @@ function Navbar() {
                 role="button"
                 className="avatar btn btn-circle btn-ghost"
               >
-                <div className="w-10 rounded-full ring ring-primary ring-offset-2 ring-offset-base-100">
-                  {user.photoURL && <img src={user.photoURL} />}
+                <div className="w-10 rounded-full ring ring-primary ring-offset-2">
+                  {user.photoURL && (
+                    <span>
+                      <img src={user.photoURL} className="relative" />
+                      {user.emailVerified ? (
+                        <span className="absolute -right-1 -top-1">
+                          <MdVerified className="rounded-full bg-white text-xl text-blue-600" />
+                        </span>
+                      ) : (
+                        ""
+                      )}
+                    </span>
+                  )}
                 </div>
               </div>
               <ul
@@ -166,10 +177,10 @@ function Navbar() {
                 className="menu dropdown-content menu-sm z-[1] mt-3 w-52 rounded-box bg-base-100 p-2 shadow"
               >
                 <li>
-                  <a className="justify-between">
+                  <Link to={"/profile"} className="justify-between">
                     Profile
                     <span className="badge">New</span>
-                  </a>
+                  </Link>
                 </li>
                 <li>
                   <a>Settings</a>
